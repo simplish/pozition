@@ -43,6 +43,8 @@ app.get('/', function (req, res) {
   });
 });
 
-app.listen(app.get('port') || 3000, function () {
-  console.log('Please visit http://localhost:' + (app.get('port') || 3000));
+app.set('port', process.env.PORT || 5000);
+
+app.listen(app.get('port'), function () {
+  console.log('Please visit http://localhost:' + app.get('port'));
 });
