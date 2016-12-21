@@ -1,3 +1,6 @@
+/*eslint no-console: 0 */
+'use strict';
+
 const express = require('express');
 const exphbs  = require('express-handlebars');
 const Handlebars  = require('handlebars');
@@ -40,4 +43,6 @@ app.get('/', function (req, res) {
   });
 });
 
-app.listen(3000, 'Please visit http://localhost:3000/');
+app.listen(3000, function () {
+  console.log('Please visit http://localhost:3000/');
+});
