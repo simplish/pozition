@@ -13,7 +13,7 @@ function testPosition(position, x, y, index, col, row) {
 
 describe('Positioner', function() {
   beforeEach(function() {
-  })
+  });
 
   it('should generate correct positions for container without margin and spacing.', () => {
     const container = new Box(100, 40);

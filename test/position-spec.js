@@ -1,6 +1,6 @@
 'use strict';
 
-const should = require('chai').should();
+require('chai').should();
 const { Position } = require('../index');
 
 describe('a Position instance', function() {

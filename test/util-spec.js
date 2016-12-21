@@ -1,6 +1,6 @@
 'use strict';
 
-const should = require('chai').should();
+require('chai').should();
 const util = require('../lib/util');
 
 describe('Utils positive numbers', function() {
@@ -19,7 +19,7 @@ describe('Utils positive numbers', function() {
     const numbers = util.positiveNumbers();
     const testNum = getRandomInt(1, 10000);
 
-    while (numbers.next().value < testNum) {}
+    while (numbers.next().value < testNum) { /* empty */ }
 
     numbers.next().value.should.equal(testNum + 1);
   });

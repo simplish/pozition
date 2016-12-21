@@ -2,9 +2,9 @@ const express = require('express');
 const exphbs  = require('express-handlebars');
 const Handlebars  = require('handlebars');
 
-const { Box, Positioner } = require('../index');
+const { Box, Positioner, Margin } = require('../index');
 
-const container = new Box(500, 500, 100, 20);
+const container = new Box(500, 500, new Margin(100, 100), 20);
 const elm = new Box(50, 50);
 const positioner = new Positioner(container, elm);
 
@@ -33,12 +33,11 @@ app.set('view engine', 'handlebars');
 app.set('views', 'example/views/');
 
 app.get('/', function (req, res) {
-    res.render('home', {
-      description: 'description',
-      exampleIndex: 1,
-      positioner: positioner
-    });
+  res.render('home', {
+    description: 'description',
+    exampleIndex: 1,
+    positioner: positioner
+  });
 });
 
-app.listen(3000);
-console.log("Please visit http://localhost:3000/");
+app.listen(3000, 'Please visit http://localhost:3000/');

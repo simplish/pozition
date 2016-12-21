@@ -1,13 +1,12 @@
 'use strict';
 
-const should = require('chai').should();
+require('chai').should();
 const { Box, Margin } = require('../index');
 
 describe('a Box instance', function() {
   const width = 1;
   const height = 1;
   const margin = new Margin(1, 1, 1, 1);
-  const spacing = 1;
 
   it('should have defaults.', () => {
     const box = new Box(width, height);
@@ -40,7 +39,7 @@ describe('a Box instance', function() {
 
   it('should validate height type', () => {
     (
-      () => new Box(width, "1")
+      () => new Box(width, '1')
     ).should.throw(RangeError);
   });
 
@@ -52,7 +51,7 @@ describe('a Box instance', function() {
 
   it('should validate width type', () => {
     (
-      () => new Box("1", height)
+      () => new Box('1', height)
     ).should.throw(RangeError);
   });
 
@@ -64,7 +63,7 @@ describe('a Box instance', function() {
 
   it('should validate spacing type', () => {
     (
-      () => new Box(width, height, margin, "1")
+      () => new Box(width, height, margin, '1')
     ).should.throw(RangeError);
   });
 

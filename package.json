@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "start": "node example/index.js"
+    "start": "node example/index.js",
+    "lint": "eslint ./*.js ./lib/**/*.js ./test/**/*.js ./example/**/*.js"
   },
   "repository": {
     "type": "git",
@@ -16,7 +17,7 @@
     "Positioner",
     "Position"
   ],
-  "author": "Simon Wikander <simonwikander@gmail.com> (https://github.com/simplish)",
+  "author": "Simon Wikander <simplish.open@gmail.com> (https://github.com/simplish)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/simplish/pozition/issues"
