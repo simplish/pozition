@@ -7,9 +7,18 @@ const Handlebars  = require('handlebars');
 
 const { Box, Positioner, Margin } = require('../index');
 
-const container = new Box(500, 500, new Margin(100, 100), 20);
-const elm = new Box(50, 50);
-const positioner = new Positioner(container, elm);
+
+// Example 1
+const containerExample1 = new Box(500, 500, new Margin(100, 100), 20);
+const elmExample1 = new Box(50, 50);
+const positionerExample1 = new Positioner(containerExample1, elmExample1);
+
+// Example 2
+const containerExample2 = new Box(500, 500, new Margin(23, 23), 20);
+const elmExample2 = new Box(53, 53);
+const positionerExample2 = new Positioner(containerExample2, elmExample2);
+positionerExample2.letMarginFillUnusedSpaceInContainer();
+
 
 var app = express();
 
@@ -35,11 +44,24 @@ app.engine('handlebars', exphbs({
 app.set('view engine', 'handlebars');
 app.set('views', 'example/views/');
 
+
 app.get('/', function (req, res) {
-  res.render('home', {
+  res.render('home', {});
+});
+
+app.get('/example1', function (req, res) {
+  res.render('example', {
     description: 'description',
     exampleIndex: 1,
-    positioner: positioner
+    positioner: positionerExample1
+  });
+});
+
+app.get('/example2', function (req, res) {
+  res.render('example', {
+    description: 'description',
+    exampleIndex: 2,
+    positioner: positionerExample2
   });
 });
 
