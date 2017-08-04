@@ -11,10 +11,111 @@ function testPosition(position, x, y, index, col, row) {
   position.row.should.equal(row);
 }
 
-describe('Positioner', function() {
-  beforeEach(function() {
+describe('Positioner with max values set', () => {
+  it('should generate correct positions with maximum number of elemets set', () => {
+    const container = new Box(115, 65, new Margin(10, 10), 5);
+    const elm = new Box(20, 20);
+
+    const positioner = new Positioner(container, elm);
+    positioner.maxNumElements = 6;
+    const positions = positioner.positions();
+
+    testPosition(positions.next().value, 10, 10, 0, 1, 1);
+    testPosition(positions.next().value, 35, 10, 1, 2, 1);
+    testPosition(positions.next().value, 60, 10, 2, 3, 1);
+    testPosition(positions.next().value, 85, 10, 3, 4, 1);
+
+    testPosition(positions.next().value, 10, 35, 4, 1, 2);
+    testPosition(positions.next().value, 35, 35, 5, 2, 2);
+
+    const lastPosition = positions.next();
+    lastPosition.done.should.be.true;
+    should.not.exist(lastPosition.value);
   });
 
+
+  it('should generate correct positions with maximum number of rows set to 1', () => {
+    const container = new Box(115, 650, new Margin(10, 10), 5);
+    const elm = new Box(20, 20);
+
+    const positioner = new Positioner(container, elm);
+    positioner.maxNumRows = 1;
+    const positions = positioner.positions();
+
+    testPosition(positions.next().value, 10, 10, 0, 1, 1);
+    testPosition(positions.next().value, 35, 10, 1, 2, 1);
+    testPosition(positions.next().value, 60, 10, 2, 3, 1);
+    testPosition(positions.next().value, 85, 10, 3, 4, 1);
+
+    const lastPosition = positions.next();
+    lastPosition.done.should.be.true;
+    should.not.exist(lastPosition.value);
+  });
+
+  it('should generate correct positions with maximum number of rows set to 2', () => {
+    const container = new Box(115, 650, new Margin(10, 10), 5);
+    const elm = new Box(20, 20);
+
+    const positioner = new Positioner(container, elm);
+    positioner.maxNumRows = 2;
+    const positions = positioner.positions();
+
+    testPosition(positions.next().value, 10, 10, 0, 1, 1);
+    testPosition(positions.next().value, 35, 10, 1, 2, 1);
+    testPosition(positions.next().value, 60, 10, 2, 3, 1);
+    testPosition(positions.next().value, 85, 10, 3, 4, 1);
+
+    testPosition(positions.next().value, 10, 35, 4, 1, 2);
+    testPosition(positions.next().value, 35, 35, 5, 2, 2);
+    testPosition(positions.next().value, 60, 35, 6, 3, 2);
+    testPosition(positions.next().value, 85, 35, 7, 4, 2);
+
+    const lastPosition = positions.next();
+    lastPosition.done.should.be.true;
+    should.not.exist(lastPosition.value);
+  });
+
+  it('should generate correct positions with maximum number of columns set to 1', () => {
+    const container = new Box(115, 65, new Margin(10, 10), 5);
+    const elm = new Box(20, 20);
+
+    const positioner = new Positioner(container, elm);
+    positioner.maxNumColumns = 1;
+    const positions = positioner.positions();
+
+    testPosition(positions.next().value, 10, 10, 0, 1, 1);
+
+    testPosition(positions.next().value, 10, 35, 1, 1, 2);
+
+    const lastPosition = positions.next();
+    lastPosition.done.should.be.true;
+    should.not.exist(lastPosition.value);
+  });
+
+  it('should generate correct positions with maximum number of columns set to 2', () => {
+    const container = new Box(115, 100, new Margin(10, 10), 5);
+    const elm = new Box(20, 20);
+
+    const positioner = new Positioner(container, elm);
+    positioner.maxNumColumns = 2;
+    const positions = positioner.positions();
+
+    testPosition(positions.next().value, 10, 10, 0, 1, 1);
+    testPosition(positions.next().value, 35, 10, 1, 2, 1);
+
+    testPosition(positions.next().value, 10, 35, 2, 1, 2);
+    testPosition(positions.next().value, 35, 35, 3, 2, 2);
+
+    testPosition(positions.next().value, 10, 60, 4, 1, 3);
+    testPosition(positions.next().value, 35, 60, 5, 2, 3);
+
+    const lastPosition = positions.next();
+    lastPosition.done.should.be.true;
+    should.not.exist(lastPosition.value);
+  });
+});
+
+describe('Positioner', function() {
   it('should generate correct positions for container without margin and spacing.', () => {
     const container = new Box(100, 40);
     const elm = new Box(20, 20);

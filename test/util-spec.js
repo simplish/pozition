@@ -3,7 +3,7 @@
 require('chai').should();
 const util = require('../lib/util');
 
-describe('Utils positive numbers', function() {
+describe('Utils positive numbers', () => {
   it('should generate finite set.', () => {
     const numbers = util.positiveNumbers(5);
     numbers.next().value.should.equal(1);
@@ -22,6 +22,25 @@ describe('Utils positive numbers', function() {
     while (numbers.next().value < testNum) { /* empty */ }
 
     numbers.next().value.should.equal(testNum + 1);
+  });
+});
+
+describe('Utils assert number', () => {
+  it('should not throw error for a number', () => {
+    util.assertNum(1).should.be.true;
+    util.assertNum(-5).should.be.true;
+  });
+
+  it('should throw error if input is a string', () => {
+    (
+      () => util.assertNum('a')
+    ).should.throw(TypeError);
+  });
+
+  it('should throw error if input is a too small number', () => {
+    (
+      () => util.assertNum(1, 2)
+    ).should.throw(TypeError);
   });
 });
 

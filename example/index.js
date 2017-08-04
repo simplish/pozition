@@ -19,6 +19,24 @@ const elmExample2 = new Box(53, 53);
 const positionerExample2 = new Positioner(containerExample2, elmExample2);
 positionerExample2.letMarginFillUnusedSpaceInContainer();
 
+// Example 3
+const containerExample3 = new Box(500, 500, new Margin(20, 20), 10);
+const elmExample3 = new Box(50, 50);
+const positionerExample3 = new Positioner(containerExample3, elmExample3);
+positionerExample3.maxNumElements = 8;
+
+
+// Example 4
+const containerExample4 = new Box(500, 500, new Margin(20, 20), 10);
+const elmExample4 = new Box(50, 50);
+const positionerExample4 = new Positioner(containerExample4, elmExample4);
+positionerExample4.maxNumColumns = 3;
+
+// Example 5
+const containerExample5 = new Box(500, 500, new Margin(20, 20), 10);
+const elmExample5 = new Box(50, 50);
+const positionerExample5 = new Positioner(containerExample5, elmExample5);
+positionerExample5.maxNumRows = 4;
 
 var app = express();
 
@@ -65,6 +83,29 @@ app.get('/example2', function (req, res) {
   });
 });
 
+app.get('/example3', function (req, res) {
+  res.render('example', {
+    description: 'With maximal number of elements set to 8.',
+    exampleIndex: 3,
+    positioner: positionerExample3
+  });
+});
+
+app.get('/example4', function (req, res) {
+  res.render('example', {
+    description: 'With maximal number of columns set to 3.',
+    exampleIndex: 4,
+    positioner: positionerExample4
+  });
+});
+
+app.get('/example5', function (req, res) {
+  res.render('example', {
+    description: 'With maximal number of rows set to 4.',
+    exampleIndex: 5,
+    positioner: positionerExample5
+  });
+});
 app.set('port', process.env.PORT || 5000);
 
 app.listen(app.get('port'), function () {
